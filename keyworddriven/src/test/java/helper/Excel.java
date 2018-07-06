@@ -13,6 +13,7 @@ import jxl.Workbook;
 import jxl.write.Label;
 import jxl.write.WritableSheet;
 import jxl.write.WritableWorkbook;
+import orangehrm.keyworddriven.Keywords;
 
 public class Excel {
 	Workbook book;
@@ -21,7 +22,7 @@ public class Excel {
 	WritableSheet wsh;
 	String path;
 	public Excel(String folderName, String fileName) {
-		path = new StringBuilder(System.getProperty("user.dir") + File.separator + folderName + File.separator + fileName).toString();
+		path = Excel.class.getClassLoader().getResource(folderName+"/"+fileName).getPath();
 		System.out.println(path);
 	}
 	
@@ -32,7 +33,7 @@ public class Excel {
 			book = Workbook.getWorkbook(fis);
 			sh = book.getSheet(sheetName);
 		} catch (Exception e) {
-			// TODO: handle exception
+			System.out.println(e.getMessage());
 		}
 	}
 	
